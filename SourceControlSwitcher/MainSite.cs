@@ -71,8 +71,11 @@ namespace SourceControlSwitcher
             Marshal.ThrowExceptionForHR(hr);
 
             _VsShell = await GetServiceAsync(typeof(SVsShell)) as IVsShell;
+            Assumes.Present(_VsShell);
             _VsRegisterScciProvider = await GetServiceAsync(typeof(IVsRegisterScciProvider)) as IVsRegisterScciProvider;
+            Assumes.Present(_VsRegisterScciProvider);
             _VsGetScciProviderInterface = await GetServiceAsync(typeof(IVsRegisterScciProvider)) as IVsGetScciProviderInterface;
+            Assumes.Present(_VsGetScciProviderInterface);
             _SettingsStore = GetWritableSettingsStore();
 
             TaskManager.Initialize(this);

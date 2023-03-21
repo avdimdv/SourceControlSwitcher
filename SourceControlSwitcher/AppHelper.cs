@@ -46,7 +46,10 @@ namespace SourceControlSwitcher
                 outWindow.GetPane(ref customGuid, out customPane);
             }
             customPane.Activate(); // Brings this pane into view
-            customPane.OutputString(msg);
+            if (customPane is IVsOutputWindowPaneNoPump)
+                (customPane as IVsOutputWindowPaneNoPump).OutputStringNoPump(msg);
+            else
+                customPane.OutputStringThreadSafe(msg);
         }
     }
 }

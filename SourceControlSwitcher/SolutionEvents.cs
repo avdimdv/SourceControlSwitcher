@@ -51,6 +51,7 @@ namespace SourceControlSwitcher
 
         public int OnAfterOpenSolution(object pUnkReserved, int fNewSolution)
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
             //SetSCC(_DTE2.Solution.FullName);
             AppHelper.Output("OnAfterOpenSolution");
             return VSConstants.S_OK;
@@ -123,6 +124,7 @@ namespace SourceControlSwitcher
 
         public int OnBeforeOpenSolution(string pszSolutionFilename)
         {
+            ThreadHelper.ThrowIfNotOnUIThread();
             AppHelper.Output("OnBeforeOpenSolution");
             _CurrentSolutionRcsType = RcsType.Unknown;
             SetSCC(pszSolutionFilename);
